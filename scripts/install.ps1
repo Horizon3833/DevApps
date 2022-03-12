@@ -14,9 +14,9 @@ function Create-Directory {
 }
 
 Write-Host Starting DevApps installation...
-$appengine=(Invoke-RestMethod "https://devapps-f239e-default-rtdb.firebaseio.com/gclousdk.json")
-$build=(Invoke-RestMethod "https://devapps-f239e-default-rtdb.firebaseio.com/build.json")
-$buildserver=(Invoke-RestMethod "https://devapps-f239e-default-rtdb.firebaseio.com/buildserver.json")
+$appengine="https://devapps-f239e-default-rtdb.firebaseio.com/gclousdk.json"
+$build="https://devapps-f239e-default-rtdb.firebaseio.com/build.json"
+$buildserver="https://devapps-f239e-default-rtdb.firebaseio.com/buildserver.json"
 $bindir="$HOME\.devapps\bin"
 $appdata="$env:APPDATA\devapps\"
 $winexe="https://devapps-f239e-default-rtdb.firebaseio.com/exe.json"
