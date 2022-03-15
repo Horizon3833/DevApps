@@ -37,7 +37,7 @@ function downloadBuildserverFiles {
 function downloadUpgradeScript() {
     curl --location \
     --progress-bar \
-    --url "" \
+    --url "https://raw.githubusercontent.com/Horizon3833/DevApps/master/scripts/update.sh" \
     --output "${appdata}/scripts/upgrade.sh"
 }
 function unpackFiles {
