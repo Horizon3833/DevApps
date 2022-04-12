@@ -1,9 +1,11 @@
+Add-Type -AssemblyName System.IO.Compression.FileSystem
 function Unzip
 {
     param([string]$zipfile, [string]$outpath)
 
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
 }
+
 function Create-Directory {
   param (
         $DirectoryName
@@ -14,12 +16,12 @@ function Create-Directory {
 }
 
 Write-Host Starting DevApps installation...
-$appengine="https://devapps-f239e-default-rtdb.firebaseio.com/gclousdk.json"
-$build="https://devapps-f239e-default-rtdb.firebaseio.com/build.json"
-$buildserver="https://devapps-f239e-default-rtdb.firebaseio.com/buildserver.json"
+$appengine=$(Invoke-RestMethod"https://devapps-f239e-default-rtdb.firebaseio.com/gclousdk.json")
+$build=$(Invoke-RestMethod"https://devapps-f239e-default-rtdb.firebaseio.com/build.json")
+$buildserver=$(Invoke-RestMethod"https://devapps-f239e-default-rtdb.firebaseio.com/buildserver.json")
 $bindir="$HOME\.devapps\bin"
 $appdata="$env:APPDATA\devapps\"
-$winexe="https://devapps-f239e-default-rtdb.firebaseio.com/exe.json"
+$winexe=$(Invoke-RestMethod"https://devapps-f239e-default-rtdb.firebaseio.com/exe.json")
 
 Create-Directory $appdata
 Create-Directory $appdata\deps
@@ -64,8 +66,3 @@ $env:Path += ";$bindir;"
 Write-Host -ForegroundColor Yellow DevApps has been successfully installed at $bindir\devapps.exe!
 
 Write-Host -ForegroundColor Green Thank You!
-
-
-
-
-
