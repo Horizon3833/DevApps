@@ -48,29 +48,6 @@ reset="\033[0m"
 
 echo "Starting DevApps installation.."
 
-appengineDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
-buildDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
-buildserverDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
-
-createDirIfDoesntExist "$HOME/.devapps"
-createDirIfDoesntExist "${bindir}"
-createDirIfDoesntExist "${appdata}"
-createDirIfDoesntExist "${appdata}/deps"
-createDirIfDoesntExist "${appdata}/scripts"
-
-echo "Downloading Appengine java SDK.."
-downloadAppengine "${appengineDownloadUrl}"
-echo -e "${green}Done!${reset}"
-echo "Downloading Build files.."
-downloadBuildFiles "${buildDownloadUrl}"
-echo -e "${green}Done!${reset}"
-echo "Downloading Buildserver files.."
-downloadBuildserverFiles "${buildserverDownloadUrl}"
-echo -e "${green}Done!${reset}"
-echo "Downloading Upgrade Script.."
-downloadUpgradeScript
-echo -e "${green}Done!${reset}"
-echo "Extracting files.."
 unpackFiles
 echo -e "${green}Done!${reset}"
 echo -e "${yellow}DevApps has been successfully installed on your device! Please add this path: ${bindir} to your PATH environment variable, then run devapps -v to verify the installation.${reset}"
