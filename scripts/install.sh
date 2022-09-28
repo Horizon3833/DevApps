@@ -1,20 +1,12 @@
 #!/bin/bash
 set -e
 appdata="$APPDATA/devapps/"
-bindir="$HOME/.appzard/bin"
+bindir="$HOME/.devapps/bin"
 
 function createDirIfDoesntExist {
     if [ ! -d "$1" ]; then
       mkdir "$1"
     fi
-}
-function downloadAppzardExecutable {
-  executableURL="https://devapps-f239e-default-rtdb.firebaseio.com/exe.json"
-    curl --location \
-    --progress-bar \
-    --create-dirs \
-    --url "$executableURL" \
-    --output "${bindir}/devapps.exe"
 }
 function downloadAppengine {
   curl --location \
@@ -56,20 +48,16 @@ reset="\033[0m"
 
 echo "Starting DevApps installation.."
 
-appengineDownloadUrl=$(curl -s "https://devapps-f239e-default-rtdb.firebaseio.com/gclousdk.json" | sed "s/\"//g")
-buildDownloadUrl=$(curl -s "https://devapps-f239e-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
-buildserverDownloadUrl=$(curl -s "https://devapps-f239e-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
+appengineDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
+buildDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
+buildserverDownloadUrl=$(curl -s "https://devapps-7b02c-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
 
 createDirIfDoesntExist "$HOME/.devapps"
 createDirIfDoesntExist "${bindir}"
 createDirIfDoesntExist "${appdata}"
 createDirIfDoesntExist "${appdata}/deps"
 createDirIfDoesntExist "${appdata}/scripts"
-echo "Downloading DevApps Executable.."
-downloadAppzardExecutable
-chmod +x "$bindir/devapps.exe"
 
-echo -e "${green}Done!${reset}"
 echo "Downloading Appengine java SDK.."
 downloadAppengine "${appengineDownloadUrl}"
 echo -e "${green}Done!${reset}"
